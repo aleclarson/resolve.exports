@@ -493,6 +493,34 @@ resolve('should handle mixed path/conditions', () => {
 	pass(pkg, '$foo.require', './foo', { require: true });
 });
 
+resolve('should return an array if "array" option is true', () => {
+
+	let pkg = {
+		"name": "foobar",
+		"exports": {
+			".": [
+				{
+					"import": "$root.import",
+				},
+				"$root.string"
+			],
+			"./foo": [
+				{
+					"require": "$foo.require"
+				},
+				"$foo.string"
+			]
+		}
+	}
+
+
+	pass(pkg, ['$root.import', "$root.string"], '.', {returnArray: true});
+	pass(pkg, ["$root.string"], '.', {require: true,returnArray: true});
+
+	pass(pkg, ['$foo.string'], './foo', {returnArray: true});
+	pass(pkg, ['$foo.require', '$foo.string'], './foo', { require: true, returnArray:true });
+})
+
 resolve.run();
 
 // ---

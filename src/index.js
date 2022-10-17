@@ -54,6 +54,7 @@ function toName(name, entry) {
  * @param {boolean} [options.require]
  * @param {string[]} [options.conditions]
  * @param {boolean} [options.unsafe]
+ * @param {boolean} [options.returnArray]
  */
 export function resolve(pkg, entry='.', options={}) {
 	let { name, exports } = pkg;
